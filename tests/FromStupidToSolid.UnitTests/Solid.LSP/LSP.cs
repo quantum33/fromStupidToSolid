@@ -10,7 +10,7 @@ namespace FromStupidToSolid.UnitTests.Solid.LSP
         [TestMethod]
         public void Square_SetHeight_HeightAndWidthAreEqual()
         {
-            Square square = _createSquare();
+            Square square = new Square { Side = 10 };
 
             Assert.AreEqual(100, square.GetArea());
         }
@@ -18,7 +18,11 @@ namespace FromStupidToSolid.UnitTests.Solid.LSP
         [TestMethod]
         public void Rectangle_SetHeightTo14AndWidthWithTo10_HeightIs14AndWidthIs10()
         {
-            var rectangle = _createRectangle();
+            Rectangle rectangle = new Rectangle
+            {
+                Height = 10,
+                Width = 14
+            };
 
             Assert.AreEqual(140, rectangle.GetArea());
         }
@@ -27,8 +31,9 @@ namespace FromStupidToSolid.UnitTests.Solid.LSP
         public void SubstituteFormBaseWithSquare_Success()
         {
             // Simply "replace" a "FormBase" to another "FormBase"
-            Square square = _createSquare();
-            FormBase formBaseSquare = square;
+            Square square = new Square { Side = 10 };
+            FormBase formBaseSquare = new Square { Side = 10 };
+
             Assert.AreEqual(square.GetArea(), formBaseSquare.GetArea());
         }
 
@@ -36,24 +41,10 @@ namespace FromStupidToSolid.UnitTests.Solid.LSP
         public void SubstituteFormBaseWithRectangle_Success()
         {
             // Simply "replace" a "FormBase" to another "FormBase"
-            Rectangle rectangle = _createRectangle();
-            FormBase formBaseSquare = rectangle;
+            Rectangle rectangle = new Rectangle { Height = 10, Width = 14 };
+            FormBase formBaseSquare = new Rectangle { Height = 10, Width = 14 };
+
             Assert.AreEqual(rectangle.GetArea(), formBaseSquare.GetArea());
         }
-
-        private readonly Func<Square> _createSquare = new Func<Square>(() =>
-        {
-            var square = new Square();
-            square.Side = 10;
-            return square;
-        });
-
-        private readonly Func<Rectangle> _createRectangle = new Func<Rectangle>(() =>
-        {
-            var rectangle = new Rectangle();
-            rectangle.Height = 10;
-            rectangle.Width = 14;
-            return rectangle;
-        });
     }
 }

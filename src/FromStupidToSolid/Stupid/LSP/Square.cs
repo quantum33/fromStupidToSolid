@@ -15,10 +15,7 @@
         public new int Width
         {
             get => base.Width;
-            set
-            {
-                Height = value;
-            }
+            set { Height = value; }
         }
     }
 }

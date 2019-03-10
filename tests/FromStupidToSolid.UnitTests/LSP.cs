@@ -1,6 +1,5 @@
 using FromStupidToSolid.Stupid.LSP;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace FromStupidToSolid.UnitTests
 {
@@ -10,7 +9,7 @@ namespace FromStupidToSolid.UnitTests
         [TestMethod]
         public void Square_SetHeight_HeightAndWidthAreEqual()
         {
-            Square square = _createSquare();
+            Square square = new Square { Height = 10 };
 
             Assert.AreEqual(10, square.Height);
             Assert.AreEqual(square.Height, square.Width);
@@ -19,35 +18,28 @@ namespace FromStupidToSolid.UnitTests
         }
 
         [TestMethod]
-        public void Rectangle_SetHeightTo14AndWidthWithTo10_HeightIs14AndWidthIs10()
+        public void Rectangle_HeightIsSetTo14AndWidthTo10_GetAreaIs140()
         {
-            Rectangle rectangle = _createRectangle();
+            var rectangle = new Rectangle
+            {
+                Height = 10,
+                Width = 14
+            };
 
             Assert.AreEqual(140, rectangle.GetArea());
         }
 
         [TestMethod]
-        public void SubstituteRectangleWithSquare_Success()
+        public void Square_SetHeightTo14AndWidthWithTo10_GetAreaIs140()
         {
-            // Simply "replace" Rectangle from the "Rectangle_SetHeightTo14AndWidthWithTo10_HeightIs14AndWidthIs10" method
-            // and see what's happening
-            Rectangle rectangle = _createSquare();
-            Assert.AreEqual(140, rectangle.GetArea()); // BREAK!!!
+            // This method is a copy/paste of the "Rectangle_HeightIsSetTo14AndWidthTo10_GetAreaIs140" method
+            // Simply "replace" Rectangle with Square
+            var rectangle = new Square
+            {
+                Height = 10,
+                Width = 14
+            };
+            Assert.AreEqual(140, rectangle.GetArea()); // SHOULD FAIL!
         }
-
-        private readonly Func<Square> _createSquare = new Func<Square>(() =>
-        {
-            var square = new Square();
-            square.Height = 10;
-            return square;
-        });
-
-        private readonly Func<Rectangle> _createRectangle = new Func<Rectangle>(() =>
-        {
-            var rectangle = new Rectangle();
-            rectangle.Height = 10;
-            rectangle.Width = 14;
-            return rectangle;
-        });
     }
 }
