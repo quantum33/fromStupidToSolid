@@ -1,8 +1,8 @@
-using FromStupidToSolid.Stupid.LSP;
+using FromStupidToSolid.Solid.LSP;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
-namespace FromStupidToSolid.UnitTests
+namespace FromStupidToSolid.UnitTests.Solid.LSP
 {
     [TestClass]
     public class LSP
@@ -12,33 +12,39 @@ namespace FromStupidToSolid.UnitTests
         {
             Square square = _createSquare();
 
-            Assert.AreEqual(10, square.Height);
-            Assert.AreEqual(square.Height, square.Width);
-
             Assert.AreEqual(100, square.GetArea());
         }
 
         [TestMethod]
         public void Rectangle_SetHeightTo14AndWidthWithTo10_HeightIs14AndWidthIs10()
         {
-            Rectangle rectangle = _createRectangle();
+            var rectangle = _createRectangle();
 
             Assert.AreEqual(140, rectangle.GetArea());
         }
 
         [TestMethod]
-        public void SubstituteRectangleWithSquare_Success()
+        public void SubstituteFormBaseWithSquare_Success()
         {
-            // Simply "replace" Rectangle from the "Rectangle_SetHeightTo14AndWidthWithTo10_HeightIs14AndWidthIs10" method
-            // and see what's happening
-            Rectangle rectangle = _createSquare();
-            Assert.AreEqual(140, rectangle.GetArea()); // BREAK!!!
+            // Simply "replace" a "FormBase" to another "FormBase"
+            Square square = _createSquare();
+            FormBase formBaseSquare = square;
+            Assert.AreEqual(square.GetArea(), formBaseSquare.GetArea());
+        }
+
+        [TestMethod]
+        public void SubstituteFormBaseWithRectangle_Success()
+        {
+            // Simply "replace" a "FormBase" to another "FormBase"
+            Rectangle rectangle = _createRectangle();
+            FormBase formBaseSquare = rectangle;
+            Assert.AreEqual(rectangle.GetArea(), formBaseSquare.GetArea());
         }
 
         private readonly Func<Square> _createSquare = new Func<Square>(() =>
         {
             var square = new Square();
-            square.Height = 10;
+            square.Side = 10;
             return square;
         });
 
