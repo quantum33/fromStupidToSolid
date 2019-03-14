@@ -1,7 +1,7 @@
 using FromStupidToSolid.Stupid.LSP;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace FromStupidToSolid.UnitTests
+namespace FromStupidToSolid.UnitTests.Stupid.LSP
 {
     [TestClass]
     public class LSP
@@ -34,7 +34,7 @@ namespace FromStupidToSolid.UnitTests
         {
             // This method is a copy/paste of the "Rectangle_HeightIsSetTo14AndWidthTo10_GetAreaIs140" method
             // Simply "replace" Rectangle with Square
-            var rectangle = new Square
+            var rectangle = new Square // new Rectangle
             {
                 Height = 10,
                 Width = 14

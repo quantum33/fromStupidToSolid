@@ -1,3 +1,3 @@
 # fromStupidToSolid
 
-temp
+todo: write examples for SRP and OCP
